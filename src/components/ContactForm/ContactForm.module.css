@@ -1,0 +1,43 @@
+.form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    border: 1px solid #000000;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+label {
+    margin-bottom: 10px;
+    color: #000000;
+}
+
+label:last-child {
+    margin-bottom: 0px;
+}
+
+.inputName {
+    margin-left: 28px;
+}
+
+.inputNumber {
+    margin-left: 10px;
+}
+
+.buttonEditor {
+    text-decoration: none;
+    cursor: pointer;
+    width: 90px;
+    font-weight: bold;
+    margin-right: auto;
+    padding: 5px 5px;
+    color: #000000;
+    border: 1px solid #000000;
+    border-radius: 4px;
+    background: #ffffff;
+}
+
+.buttonEditor:hover {
+    background: #267bef;
+    color: #FFFFFF;
+}
