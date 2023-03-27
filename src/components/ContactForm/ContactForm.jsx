@@ -1,44 +1,39 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import style from './ContactForm.module.css';
 
-class ContactForm extends Component {
-    state = {
-    name: '',
-    number: '',
-    };
+function ContactForm ({onSubmit}) {
+    const [name, setName] = useState('');
+  const [number, setNumber] = useState('');
     
-handleChange = name => event => {
-    const { target } = event;
+  const handleChange = event => {
+    switch (event.currentTarget.name) {
+      case 'name':
+        setName(event.currentTarget.value);
+        break;
+      case 'number':
+        setNumber(event.currentTarget.value);
+        break;
+      default:
+        throw new Error('Error');
+    };
+  }
 
-    this.setState(() => ({
-      [name]: target.value,
-    }));
-  };
-
-  handleSubmit = event => {
+  const handleSubmit = event => {
     event.preventDefault();
 
-    const { onSubmit } = this.props;
-    onSubmit(this.state);
-    this.resetForm();
+    onSubmit({ name, number });
+    setName('');
+    setNumber('');
   };
 
-  resetForm = () => {
-    this.setState(() => ({
-      name: '',
-      number: '',
-    }));
-  };
-
-  render() {
     return (
-      <form className={style.form} onSubmit={this.handleSubmit}>
+      <form className={style.form} onSubmit={handleSubmit}>
         <label>
           Name
           <input
             className={style.inputName}
-            value={this.state.name}
-            onChange={this.handleChange('name')}
+            value={name}
+            onChange={handleChange}
             type="text"
             name="name"
             pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
@@ -50,8 +45,8 @@ handleChange = name => event => {
           Number
           <input
             className={style.inputNumber}
-            value={this.state.number}
-            onChange={this.handleChange('number')}
+            value={number}
+            onChange={handleChange}
             type="tel"
             name="number"
             pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
@@ -65,7 +60,6 @@ handleChange = name => event => {
         </button>
       </form>
     );
-  }    
-}
+  } 
 
 export default ContactForm;
